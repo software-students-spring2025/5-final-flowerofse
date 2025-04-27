@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Upload Game</title></head>
+<body>
+  <h2>Upload Game</h2>
+  <form method="post" enctype="multipart/form-data">
+    Title: <input name="title"><br>
+    Description:<br>
+    <textarea name="description"></textarea><br>
+    ZIP File: <input type="file" name="game_file" accept=".zip"><br>
+    Cover Image (PNG): <input type="file" name="cover_image" accept="image/png"><br>
+    <button type="submit">Upload</button>
+  </form>
+  <a href="/">Back to Home</a>
+</body>
+</html>
