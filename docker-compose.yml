@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile
     container_name: web-app
     ports:
-      - "3001:3000"
+      - "3000:3000"
     volumes:
       - ./web-app:/app
     depends_on:
