@@ -13,7 +13,7 @@ from PIL import Image
 
 app = Flask(__name__)
 app.secret_key = "dev"
-app.config["MONGO_URI"] = "mongodb://mongodb:27017/gameforum"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/gameforum"
 
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 
