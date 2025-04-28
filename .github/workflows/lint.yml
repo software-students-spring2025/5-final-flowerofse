@@ -1,0 +1,27 @@
+name: Lint Python code for Web App
+on: [push, pull_request]
+
+jobs:
+  lint-web-app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        subdir: [web_app]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Linter
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Run flake8 Linting
+        working-directory: ${{ matrix.subdir }}
+        run: |
+          flake8 --max-line-length=120 --statistics --count .
