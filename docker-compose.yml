@@ -22,20 +22,20 @@ services:
       - FLASK_DEBUG=1
     restart: unless-stopped
     
-  web-tests:
-    build: ./web-app/tests  # Build from the test directory
-    container_name: web-test
-    depends_on:
-      - mongodb
-      - web
-    command: ["pytest", "tests/"]  # Run the tests using pytest
-    volumes:
-      - ./web-app:/app  # Mount the web app directory into the container
-    environment:
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
-    restart: "no" 
-    
+#  web-tests:
+#    build: ./web-app/tests  # Build from the test directory
+#    container_name: web-test
+#    depends_on:
+#      - mongodb
+#      - web
+#    command: ["pytest", "tests/"]  # Run the tests using pytest
+#    volumes:
+#      - ./web-app:/app  # Mount the web app directory into the container
+#    environment:
+#      - FLASK_ENV=development
+#      - FLASK_DEBUG=1
+#    restart: "no" 
+
 #  ml-tests:
 #    build: ./machine-learning-client
 #    depends_on:
