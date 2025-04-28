@@ -13,7 +13,8 @@ from PIL import Image
 
 app = Flask(__name__)
 app.secret_key = "dev"
-app.config["MONGO_URI"] = "mongodb://localhost:27017/gameforum"
+app.config["MONGO_URI"] = "mongodb://mongodb:27017/gameforum"
+
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 
 mongo = PyMongo(app)
@@ -40,7 +41,7 @@ def home():
 def register():
     if request.method == "POST":
         username = request.form["username"]
-        password = generate_password_hash(request.form["password"])
+        password = generate_password_hash(request.form["password"], method='pbkdf2:sha256')
         if mongo.db.users.find_one({"username": username}):
             return "Username exists"
         mongo.db.users.insert_one({"username": username, "password": password})
