@@ -2,56 +2,39 @@
 <html>
 <head>
   <title>Game Share Forum</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 900px;
-      margin: auto;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-    }
-    .cover {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-right: 20px;
-    }
-    .game-link {
-      font-size: 1.2em;
-      text-decoration: none;
-      color: #333;
-    }
-    .game-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+<div class="container">
+
+  <nav>
+    {% if current_user.is_authenticated %}
+      Welcome, {{ current_user.username }} |
+      <a href="/upload">Upload Game</a> |
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a> |
+      <a href="/register">Register</a>
+    {% endif %}
+  </nav>
+
   <h1>All Games</h1>
 
-  {% if current_user.is_authenticated %}
-    <p>Welcome, {{ current_user.username }} | <a href="/upload">Upload Game</a> | <a href="/logout">Logout</a></p>
-  {% else %}
-    <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
-  {% endif %}
-
   <ul>
-    {% for game in games %}
-      <li>
-        <img src="{{ url_for('static', filename='uploads/' + game.cover_image) }}" alt="Cover" class="cover">
-        <a class="game-link" href="/game/{{ game._id }}">{{ game.title }}</a>
-      </li>
-    {% endfor %}
+    {% if games %}
+      {% for game in games %}
+        <li>
+          <img src="{{ url_for('static', filename='uploads/' + game.cover_image) }}" alt="Cover" class="cover">
+          <a class="game-link" href="/game/{{ game._id }}">{{ game.title }}</a>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li>No games uploaded yet. Be the first to <a href="/upload">upload a game</a>!</li>
+    {% endif %}
   </ul>
+
+</div>
 
 </body>
 </html>

@@ -113,10 +113,21 @@ def upload_game():
 
         return redirect(url_for("home"))
     return render_template("upload.html")
+
+
 @app.route("/game/<game_id>", methods=["GET"])
 def game_detail(game_id):
     game = mongo.db.games.find_one({"_id": ObjectId(game_id)})
-    comments = list(mongo.db.comments.find({"game_id": game_id}))
+    comments = list(mongo.db.comments.aggregate([
+        {"$match": {"game_id": game_id}},
+        {"$lookup": {
+            "from": "users",
+            "localField": "user_id",
+            "foreignField": "_id",
+            "as": "user"
+        }},
+        {"$unwind": {"path": "$user", "preserveNullAndEmptyArrays": True}}
+    ]))
     return render_template("game_detail.html", game=game, comments=comments)
 
 @app.route("/comment/<game_id>", methods=["POST"])
