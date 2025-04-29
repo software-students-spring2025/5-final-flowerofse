@@ -2,27 +2,32 @@ import os
 import pytest
 import tempfile
 import zipfile
-from web_app.app import app, mongo
-from bson import ObjectId
+from web_app.app import create_app, mongo
 from werkzeug.security import generate_password_hash
-
-@pytest.fixture(autouse=True, scope="function")
-def clean_db():
-    mongo.db.users.delete_many({})
-    mongo.db.games.delete_many({})
-    mongo.db.comments.delete_many({})
-    yield
-    mongo.db.users.delete_many({})
-    mongo.db.games.delete_many({})
-    mongo.db.comments.delete_many({})
+from bson import ObjectId
 
 @pytest.fixture
-def client():
-    app.config["TESTING"] = True
-    app.config["UPLOAD_FOLDER"] = tempfile.mkdtemp()
-    app.config["MONGO_URI"] = "mongodb://127.0.0.1:27017/test_gameforum"
-    client = app.test_client()
-    yield client
+def app():
+    os.environ["MONGO_URI"] = "mongodb://127.0.0.1:27017/test_gameforum"
+    test_app = create_app()
+    test_app.config["TESTING"] = True
+    test_app.config["UPLOAD_FOLDER"] = tempfile.mkdtemp()
+    return test_app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+@pytest.fixture(autouse=True)
+def clean_db(app):
+    with app.app_context():
+        mongo.db.users.delete_many({})
+        mongo.db.games.delete_many({})
+        mongo.db.comments.delete_many({})
+        yield
+        mongo.db.users.delete_many({})
+        mongo.db.games.delete_many({})
+        mongo.db.comments.delete_many({})
 
 def test_home(client):
     rv = client.get("/")
@@ -105,4 +110,3 @@ def test_logout(client):
 
     rv = client.get("/logout", follow_redirects=True)
     assert rv.status_code == 200
-
