@@ -4,7 +4,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #901e23;
+  background: url("./background.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 html {
@@ -14,7 +15,7 @@ html {
 .container {
   max-width: 900px;
   margin: 40px auto;
-  background: #baa17a; /* new warm beige */
+  background: #e8e4df; /* new warm beige */
   padding: 30px 40px;
   border-radius: 0;
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
@@ -37,7 +38,7 @@ nav a:hover {
 }
 
 h1, h2, h3 {
-  color: #333;
+  color: #cd0000;
   margin-top: 0;
 }
 
@@ -64,7 +65,7 @@ textarea {
 }
 
 button {
-  background-color: #28a745;
+  background-color: #c3c1be;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -156,7 +157,7 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: #e8e4df;
   padding: 14px 40px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: 'Press Start 2P', cursive;
@@ -172,6 +173,12 @@ li {
 .navbar-logo {
   font-weight: bold;
   font-size: 16px; /* Increased from 18px (for pixel font) */
+  color:#b59f7b;
+  text-shadow:
+    -1px -1px 0 #cd0000,
+     1px -1px 0 #cd0000,
+    -1px  1px 0 #cd0000,
+     1px  1px 0 #cd0000; /* creates a red pixel-outline */
 }
 
 .navbar-links {
@@ -180,7 +187,7 @@ li {
 }
 
 .navbar-links a {
-  color: black;
+  color: #cd0000;
   text-decoration: none;
   font-size: 14px;
 }
@@ -197,15 +204,22 @@ li {
 
 .navbar-right button {
   padding: 8px 14px;
-  border: 1px solid #aaa;
-  background: white;
-  color: black;
+  border: 2px solid #b59f7b;
+  background: #a11e27;
+  color: #b59f7b;
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
   font-family: 'Press Start 2P', cursive;
 }
-
+.navbar-right span {
+  color: #b59f7b;
+  text-shadow:
+    -0.4px -0.4px 0 #cd0000,
+    0.4px -0.4px 0 #cd0000,
+    -0.4px  0.4px 0 #cd0000,
+    0.4px  0.4px 0 #cd0000;
+}
 .navbar-right button:hover {
   background: #f0f0f0;
 }
@@ -218,8 +232,8 @@ li {
 }
 
 .game-card {
-  background: #333;
-  border: 1px solid #a11f26;
+  background: #ffffff;
+  border: 1px solid #353536;
   border-radius: 0; /* Sharp corners */
   box-shadow: none; /* No extra pixel effect */
   transition: transform 0.2s ease;
@@ -246,11 +260,16 @@ li {
 .game-title {
   display: block;
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: black;
   text-decoration: none;
   font-family: 'Press Start 2P', cursive;
 }
 
-.game-title:hover {
+.game-card:hover {
+  background: #a11e27;
+}
+
+.game-card:hover .game-title {
+  color: #bca37a;
   text-decoration: underline;
 }
