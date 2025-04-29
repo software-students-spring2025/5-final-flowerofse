@@ -17,26 +17,24 @@ jobs:
     strategy:
       matrix:
         subdir: [web_app]
+    container:
+      image: python:3.11-slim
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
       - name: Install dependencies
         working-directory: ${{ matrix.subdir }}
         run: |
-          python -m pip install --upgrade pip
+          apt-get update && apt-get install -y gcc libffi-dev libpq-dev libssl-dev
+          pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
       - name: Run Tests with Coverage
         working-directory: ${{ matrix.subdir }}
         env:
-          MONGO_URI: mongodb://127.0.0.1:27017/
+          MONGO_URI: mongodb://host.docker.internal:27017/test_gameforum
         run: |
           pytest --cov=web_app --cov-report=xml
 
