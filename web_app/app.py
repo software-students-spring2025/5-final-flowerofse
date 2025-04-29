@@ -10,13 +10,12 @@ import zipfile
 import uuid
 from PIL import Image
 
+mongo = PyMongo()
 app = Flask(__name__)
 app.secret_key = "dev"
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/gameforum")
-
 app.config["UPLOAD_FOLDER"] = "static/uploads"
-
-mongo = PyMongo(app)
+mongo.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
