@@ -42,8 +42,9 @@ def test_register_and_login(client):
     assert rv.status_code == 200
 
 def test_login_fail(client):
-    rv = client.post("/login", data={"username": "nouser", "password": "wrong"})
-    assert b"Invalid credentials" in rv.data
+    rv = client.post("/login", data={"username": "nouser", "password": "wrong"}, follow_redirects=True)
+    assert rv.status_code == 200
+    assert b"Invalid username or password" in rv.data
 
 def test_upload_game(client):
     game_zip = tempfile.NamedTemporaryFile(suffix=".zip", delete=False)

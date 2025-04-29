@@ -37,17 +37,22 @@ def register_routes(app):
 
     @app.route("/register", methods=["GET", "POST"])
     def register():
+        error = None
         if request.method == "POST":
             username = request.form["username"]
             password = generate_password_hash(request.form["password"], method='pbkdf2:sha256')
             if mongo.db.users.find_one({"username": username}):
-                return "Username exists"
-            mongo.db.users.insert_one({"username": username, "password": password})
-            return redirect(url_for("login"))
-        return render_template("register.html")
+                error = "Username already exists"
+            else:
+                mongo.db.users.insert_one({"username": username, "password": password})
+                return redirect(url_for("login"))
+        return render_template("register.html", error=error)
+
 
     @app.route("/login", methods=["GET", "POST"])
+    @app.route("/login", methods=["GET", "POST"])
     def login():
+        error = None
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
@@ -55,8 +60,10 @@ def register_routes(app):
             if user_doc and check_password_hash(user_doc["password"], password):
                 login_user(User(user_doc))
                 return redirect(url_for("home"))
-            return "Invalid credentials"
-        return render_template("login.html")
+            else:
+                error = "Invalid username or password"
+        return render_template("login.html", error=error)
+
 
     @app.route("/logout")
     @login_required
