@@ -103,10 +103,10 @@ To do unit and integration tests:
 pytest web_app/tests/test_app.py
 ```
 
-To coverage tests:
+To do coverage tests:
 
 ```
 pytest --cov=web_app
 ```
 
-To stop services and clean Up, see "Stop and Clean Up Services".
+To stop services and clean up, see "Stop and Clean Up Services".
