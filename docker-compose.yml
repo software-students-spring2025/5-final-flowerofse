@@ -16,10 +16,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./web_app:/app
+      - .:/app
     depends_on:
       - mongodb
     environment:
+      - FLASK_APP=web_app.app:create_app
       - FLASK_ENV=development
       - FLASK_DEBUG=1
       - MONGO_URI=mongodb://mongodb:27017/gameforum
@@ -32,10 +33,11 @@ services:
     container_name: web-tests
     depends_on:
       - mongodb
-    command: ["pytest", "--tb=short", "--maxfail=2", "--disable-warnings", "--cov=app", "tests/"]
+    command: ["pytest", "--tb=short", "--maxfail=2", "--disable-warnings", "--cov=web_app", "web_app/tests/"]
     volumes:
-      - ./web_app:/app
+      - .:/app
     environment:
+      - FLASK_APP=web_app.app:create_app
       - FLASK_ENV=development
       - FLASK_DEBUG=1
       - MONGO_URI=mongodb://mongodb:27017/gameforum
