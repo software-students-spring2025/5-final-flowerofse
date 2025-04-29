@@ -22,6 +22,7 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://mongodb:27017/gameforum
     restart: unless-stopped
 
   web-tests:
@@ -37,6 +38,7 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://mongodb:27017/gameforum
     restart: "no"
 
 volumes:
