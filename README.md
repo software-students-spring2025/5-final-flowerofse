@@ -69,7 +69,7 @@ You can access the service through the following link:
 
 Run web-app
 ```
-cd 
+cd web_app
 pip install -r requirements.txt
 python app.py
 ```
