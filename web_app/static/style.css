@@ -1,12 +1,12 @@
-/* Apply pixel font */
 body {
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #87CEFA 0%, #ffffff 100%);
+  background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%); 
   background-attachment: fixed;
+  color: #ffffff; 
 }
 
 html {
@@ -16,10 +16,10 @@ html {
 .container {
   max-width: 900px;
   margin: 40px auto;
-  background: white;
+  background: #121212;
   padding: 30px 40px;
   border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 12px rgba(255, 165, 0, 0.4);
 }
 
 nav {
@@ -30,7 +30,7 @@ nav {
 nav a {
   margin-left: 10px;
   font-weight: bold;
-  color: #007bff;
+  color: #ffa500;
   text-decoration: none;
 }
 
@@ -39,7 +39,7 @@ nav a:hover {
 }
 
 h1, h2, h3 {
-  color: #333;
+  color: #ffa500;
   margin-top: 0;
 }
 
@@ -54,8 +54,10 @@ textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #ffa500;
   border-radius: 5px;
+  background: #1a1a1a;
+  color: white;
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
 }
@@ -66,8 +68,8 @@ textarea {
 }
 
 button {
-  background-color: #28a745;
-  color: white;
+  background-color: #ffa500;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -78,7 +80,7 @@ button {
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #ff8c00;
 }
 
 ul {
@@ -87,12 +89,13 @@ ul {
 }
 
 li {
-  background: #f1f1f1;
+  background: #1a1a1a;
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 8px;
   display: flex;
   align-items: center;
+  box-shadow: 0 1px 4px rgba(255, 165, 0, 0.2);
 }
 
 .cover {
@@ -105,48 +108,46 @@ li {
 
 .game-link {
   font-size: 1.2em;
-  color: #333;
+  color: #ffffff;
 }
 
 .game-link:hover {
   text-decoration: underline;
 }
 
-/* Game iframe style */
 .game-section iframe {
   width: 100%;
   height: 80vh;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(255, 165, 0, 0.2);
   display: block;
 }
 
-/* Comments */
 .comments-section {
   margin-top: 40px;
-  background: #f9f9f9;
+  background: #1a1a1a;
   padding: 20px;
   border-radius: 8px;
 }
 
 .comments-list li {
-  background: #ffffff;
+  background: #2a2a2a;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 4px rgba(255,165,0,0.1);
 }
 
 .comments-section small {
-  color: #777;
+  color: #aaaaaa;
 }
 
 .back-link {
   display: block;
   margin-top: 20px;
   text-align: center;
-  color: #007bff;
+  color: #ffa500;
 }
 
 .back-link:hover {
