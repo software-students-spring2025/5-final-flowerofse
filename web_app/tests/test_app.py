@@ -9,7 +9,7 @@ from bson import ObjectId
 @pytest.fixture
 def app():
     # Check if we're running inside Docker (common CI/CD setups set HOSTNAME inside container)
-    is_inside_docker = os.path.exists("/.dockerenv") or os.getenv("CI") == "true"
+    is_inside_docker = os.path.exists("/.dockerenv")
 
     if is_inside_docker:
         mongo_uri = "mongodb://mongodb:27017/test_gameforum"
