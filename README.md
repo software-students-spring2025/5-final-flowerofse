@@ -16,7 +16,9 @@ A web-based platform where users can register, upload HTML5 games in ZIP format,
 ---
 
 ## Project Structure
-
+web_app/app.py  # Main application
+web_app/static/uploads/ # Eample html games
+web_app/test_app.py # Unit and integration tests
 
 
 ---
@@ -85,3 +87,26 @@ Stop and remove containers, networks, volumes, and images:
 ```
 docker-compose down --volumes --rmi all
 ```
+
+### 5. Test apps and coverage
+To set up the environment, install dependencies, and run automated tests for the project, use the following commands:
+
+```
+cd 5-final-flowerofse
+pip install pytest pytest-cov
+docker-compose up -d
+```
+
+To do unit and integration tests:
+
+```
+pytest web_app/tests/test_app.py
+```
+
+To coverage tests:
+
+```
+pytest --cov=web_app
+```
+
+To stop services and clean Up, see "Stop and Clean Up Services".
