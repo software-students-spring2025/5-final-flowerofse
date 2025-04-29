@@ -7,34 +7,44 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-<div class="container">
-
-  <nav>
-    {% if current_user.is_authenticated %}
-      Welcome, {{ current_user.username }} |
-      <a href="/upload">Upload Game</a> |
-      <a href="/logout">Logout</a>
-    {% else %}
-      <a href="/login">Login</a> |
-      <a href="/register">Register</a>
-    {% endif %}
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="navbar-logo">GameShare.io</span>
+      <div class="navbar-links">
+        <a href="/">Browse</a>
+        {% if current_user.is_authenticated %}
+          <a href="/upload">Upload Game</a>
+        {% endif %}
+      </div>
+    </div>
+  
+    <div class="navbar-right">
+      {% if current_user.is_authenticated %}
+        <span>Welcome, {{ current_user.username }}</span>
+        <button onclick="location.href='/logout'">Logout</button>
+      {% else %}
+        <button onclick="location.href='/login'">Log in</button>
+        <button onclick="location.href='/register'">Register</button>
+      {% endif %}
+    </div>
   </nav>
-
+<div class="container">
   <h1>All Games</h1>
 
-  <ul>
+  <div class="game-grid">
     {% if games %}
       {% for game in games %}
-        <li>
-          <img src="{{ url_for('static', filename='uploads/' + game.cover_image) }}" alt="Cover" class="cover">
-          <a class="game-link" href="/game/{{ game._id }}">{{ game.title }}</a>
-        </li>
+        <div class="game-card">
+          <img src="{{ url_for('static', filename='uploads/' + game.cover_image) }}" alt="Cover" class="game-thumb">
+          <div class="game-info">
+            <a class="game-title" href="/game/{{ game._id }}">{{ game.title }}</a>
+          </div>
+        </div>
       {% endfor %}
     {% else %}
       <li>No games uploaded yet. Be the first to&nbsp;<a href="/upload">upload a game</a>!</li>
     {% endif %}
-  </ul>
+  </div>
 
 </div>
 
