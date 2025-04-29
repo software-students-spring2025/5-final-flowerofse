@@ -22,9 +22,9 @@
       {% for comment in comments %}
         <li>
           {% if comment.user %}
-            <strong>{{ comment.user.username }}</strong>: {{ comment.content }}
+            <strong>{{ comment.user.username }}</strong>: {{ comment.content }}&nbsp;
           {% else %}
-            {{ comment.content }}
+            {{ comment.content }}&nbsp;
           {% endif %}
           <br>
           <small>{{ comment.timestamp.strftime('%B %d, %Y at %I:%M %p') }}</small>
