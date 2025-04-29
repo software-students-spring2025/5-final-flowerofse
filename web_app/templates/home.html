@@ -35,7 +35,7 @@
     {% if games %}
       {% for game in games %}
         <div class="game-card">
-          <img src="{{ url_for('static', filename='uploads/' + game.cover_image) }}" alt="Cover" class="game-thumb">
+          <img src="{{ url_for('uploaded_file', filename=game.cover_image) }}" alt="Cover" class="game-thumb"> 
           <div class="game-info">
             <a class="game-title" href="/game/{{ game._id }}">{{ game.title }}</a>
           </div>

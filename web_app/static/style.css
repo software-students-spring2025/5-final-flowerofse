@@ -65,8 +65,8 @@ textarea {
 }
 
 button {
-  background-color: #c3c1be;
-  color: white;
+  background-color: #a11e27;
+  color: #bca37a;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -77,7 +77,10 @@ button {
 }
 
 button:hover {
-  background-color: #218838;
+  background: #ffffff;
+  color: #a11e27;
+  text-decoration: underline;
+  border: 2px solid #b59f7b;
 }
 
 ul {
@@ -124,9 +127,21 @@ li {
 /* Comments */
 .comments-section {
   margin-top: 40px;
-  background: #f9f9f9;
+  background: #72706f;
   padding: 20px;
   border-radius: 8px;
+}
+
+textarea {
+  display: block;
+  margin: 20px auto 10px auto; /* center horizontally, add top & bottom spacing */
+  width: 90%;                  /* or a fixed width like 600px if you prefer */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  resize: vertical;
 }
 
 .comments-list li {
@@ -145,10 +160,11 @@ li {
   display: block;
   margin-top: 20px;
   text-align: center;
-  color: #007bff;
+  color: #a11e27;
 }
 
 .back-link:hover {
+  color: #bca37a;
   text-decoration: underline;
 }
 

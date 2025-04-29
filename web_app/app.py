@@ -8,6 +8,7 @@ import os
 import zipfile
 import uuid
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 mongo = PyMongo()
 login_manager = LoginManager()
@@ -17,7 +18,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = "dev"
     app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/gameforum")
-    app.config["UPLOAD_FOLDER"] = "static/uploads"
+    app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "uploads")    
 
     mongo.init_app(app)
     login_manager.init_app(app)
@@ -138,6 +139,13 @@ def register_routes(app):
             "timestamp": datetime.utcnow()
         })
         return redirect(url_for("game_detail", game_id=game_id))
+    
+    @app.route('/games/<path:filename>')
+    def serve_game(filename):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    @app.route('/uploads/<path:filename>')
+    def uploaded_file(filename):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 @login_manager.user_loader
