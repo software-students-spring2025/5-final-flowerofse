@@ -20,6 +20,7 @@ def clean_db():
 def client():
     app.config["TESTING"] = True
     app.config["UPLOAD_FOLDER"] = tempfile.mkdtemp()
+    app.config["MONGO_URI"] = "mongodb://127.0.0.1:27017/test_gameforum"
     client = app.test_client()
     yield client
 
