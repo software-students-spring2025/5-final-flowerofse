@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Register</title>
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
 
-  <h2>Register</h2>
+  <h2>Login</h2>
 
   <form method="post">
     <label>Username:</label>
@@ -17,12 +19,13 @@
     <label>Password:</label>
     <input type="password" name="password" required><br>
 
-    <button type="submit">Register</button>
+    <button type="submit">Login</button>
   </form>
 
-  <p><a href="/login">Already have an account?</a></p>
+  <p><a href="/register">Don't have an account?</a></p>
 
 </div>
 
 </body>
 </html>
+

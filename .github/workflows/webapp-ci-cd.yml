@@ -1,0 +1,46 @@
+name: CI Tests for Web App
+on: [push, pull_request]
+
+jobs:
+  web-app-tests:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    strategy:
+      matrix:
+        subdir: [web_app]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.subdir }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run Tests with Coverage
+        working-directory: ${{ matrix.subdir }}
+        env:
+          MONGO_URI: mongodb://127.0.0.1:27017/
+        run: |
+          pytest --cov=web_app --cov-report=xml
+
+      - name: Enforce 80% Coverage Threshold
+        working-directory: ${{ matrix.subdir }}
+        run: |
+          coverage report --fail-under=80

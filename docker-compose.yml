@@ -10,33 +10,35 @@ services:
 
   web:
     build:
-      context: ./web-app
+      context: ./web_app
       dockerfile: Dockerfile
-    container_name: web-app
+    container_name: web_app
     ports:
       - "3000:3000"
     volumes:
-      - ./web-app:/app
+      - ./web_app:/app
     depends_on:
       - mongodb
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://mongodb:27017/gameforum
     restart: unless-stopped
 
   web-tests:
     build:
-      context: ./web-app
+      context: ./web_app
       dockerfile: Dockerfile.test
     container_name: web-tests
     depends_on:
       - mongodb
     command: ["pytest", "--tb=short", "--maxfail=2", "--disable-warnings", "--cov=app", "tests/"]
     volumes:
-      - ./web-app:/app
+      - ./web_app:/app
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://mongodb:27017/gameforum
     restart: "no"
 
 volumes:
