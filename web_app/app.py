@@ -4,12 +4,15 @@ from flask_login import LoginManager, login_user, login_required, logout_user, U
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 from datetime import datetime
-import os, zipfile, uuid
+import os
+import zipfile
+import uuid
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 
 mongo = PyMongo()
 login_manager = LoginManager()
+
 
 def create_app():
     app = Flask(__name__)
@@ -30,6 +33,7 @@ class User(UserMixin):
         self.id = str(user_doc["_id"])
         self.username = user_doc["username"]
 
+
 def register_routes(app):
     @app.route("/")
     def home():
@@ -49,8 +53,6 @@ def register_routes(app):
                 return redirect(url_for("login"))
         return render_template("register.html", error=error)
 
-
-    @app.route("/login", methods=["GET", "POST"])
     @app.route("/login", methods=["GET", "POST"])
     def login():
         error = None
@@ -64,7 +66,6 @@ def register_routes(app):
             else:
                 error = "Invalid username or password"
         return render_template("login.html", error=error)
-
 
     @app.route("/logout")
     @login_required
@@ -95,11 +96,14 @@ def register_routes(app):
                 cover_path = os.path.join(folder_path, "cover.png")
                 cover_file.save(cover_path)
             else:
-                default_cover = os.path.join("static", "default_cover.png")
+                default_cover = os.path.join(app.root_path, "static", "default_cover.png")
                 cover_path = os.path.join(folder_path, "cover.png")
                 if os.path.exists(default_cover):
                     from shutil import copyfile
                     copyfile(default_cover, cover_path)
+                else:
+                    print("default_cover.png not found")
+
 
             mongo.db.games.insert_one({
                 "title": request.form["title"],
@@ -146,10 +150,12 @@ def register_routes(app):
     def uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     user_doc = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     return User(user_doc) if user_doc else None
+
 
 if __name__ == "__main__":
     app = create_app()
