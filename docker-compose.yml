@@ -17,6 +17,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - ./web_app/uploads:/app/uploads
     depends_on:
       - mongodb
     environment:
