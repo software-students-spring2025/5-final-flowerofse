@@ -12,6 +12,10 @@
 
   <h2>Register</h2>
 
+  {% if error %}
+  <div style="color: red; margin-bottom: 10px;">{{ error }}</div>
+  {% endif %}
+
   <form method="post">
     <label>Username:</label>
     <input type="text" name="username" required><br>
