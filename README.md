@@ -74,7 +74,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### 5. Stop and Clean Up Services
+### 6. Stop and Clean Up Services
 To shut down all running services and clean up resources(consider the large size of client, you may want that), use the following commands:
 
 Stop containers (but keep images and volumes):
