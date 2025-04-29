@@ -74,7 +74,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### 6. Stop and Clean Up Services
+### 5. Stop and Clean Up Services
 To shut down all running services and clean up resources(consider the large size of client, you may want that), use the following commands:
 
 Stop containers (but keep images and volumes):
@@ -88,7 +88,7 @@ Stop and remove containers, networks, volumes, and images:
 docker-compose down --volumes --rmi all
 ```
 
-### 5. Test apps and coverage
+### 6. Test apps and coverage
 To set up the environment, install dependencies, and run automated tests for the project, use the following commands:
 
 ```
