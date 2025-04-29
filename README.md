@@ -1,9 +1,9 @@
 ![Lint-free](https://github.com/nyu-software-engineering/containerized-app-exercise/actions/workflows/lint.yml/badge.svg)
 ![CI Tests](https://github.com/software-students-spring2025/4-containers-excalibur-1/actions/workflows/test.yml/badge.svg)
 
-# Final Project
+# # GameShare.io
 
-An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
+A web-based platform where users can register, upload HTML5 games in ZIP format, and interact with other users through comments and game browsing. Users can also view cover images, comment on games.
 
 ---
 
@@ -15,19 +15,18 @@ An exercise to put to practice software development teamwork, subsystem communic
 
 ---
 
-## Project Overview
-
-
-
----
-
 ## Project Structure
 
 
 
 ---
 
-## Setup Instructions
+## Remote Deployment Site
+**Live server:** [http://67.207.80.246:3000/](http://67.207.80.246:3000/)
+
+---
+
+## Local Setup Instructions
 
 ### Prerequisites
 
@@ -41,8 +40,8 @@ An exercise to put to practice software development teamwork, subsystem communic
 ### 1. Clone the Repository
 
 ```
-git clone 
-cd 
+git clone https://github.com/software-students-spring2025/5-final-flowerofse
+cd 5-final-flowerofse
 ```
 
 ### 2. Set Up Environment Variables
@@ -52,7 +51,6 @@ Create a `.env` file in the root directory. Use the provided`.env.example` file 
 ```
 MONGO_URI=mongodb://localhost:27017
 WEB_APP_PORT=3001
-ML_CLIENT_PORT=8000
 ```
 
 ### 3. Start All Services (Run with Docker)
@@ -63,7 +61,6 @@ docker-compose up --build -d
 
 You can access the service through the following link:
 - The web app: (http://localhost:3001)
-- The ML client: (http://localhost:8000)
 - MongoDB database: (http://localhost:27017)
 
 ### 4. Start Each Service Independently (Run without Docker)
@@ -74,7 +71,6 @@ cd
 pip install -r requirements.txt
 python app.py
 ```
-
 
 ### 5. Stop and Clean Up Services
 To shut down all running services and clean up resources(consider the large size of client, you may want that), use the following commands:
