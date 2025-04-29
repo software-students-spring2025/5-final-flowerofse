@@ -10,7 +10,6 @@ import zipfile
 import uuid
 from PIL import Image
 
-
 app = Flask(__name__)
 app.secret_key = "dev"
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/gameforum")
@@ -113,7 +112,6 @@ def upload_game():
 
         return redirect(url_for("home"))
     return render_template("upload.html")
-
 
 @app.route("/game/<game_id>", methods=["GET"])
 def game_detail(game_id):
