@@ -8,7 +8,16 @@ from bson import ObjectId
 
 @pytest.fixture
 def app():
-    os.environ["MONGO_URI"] = "mongodb://127.0.0.1:27017/test_gameforum"
+    # Check if we're running inside Docker (common CI/CD setups set HOSTNAME inside container)
+    is_inside_docker = os.path.exists("/.dockerenv") or os.getenv("CI") == "true"
+
+    if is_inside_docker:
+        mongo_uri = "mongodb://mongodb:27017/test_gameforum"
+    else:
+        mongo_uri = "mongodb://127.0.0.1:27017/test_gameforum"
+
+    os.environ["MONGO_URI"] = mongo_uri
+
     test_app = create_app()
     test_app.config["TESTING"] = True
     test_app.config["UPLOAD_FOLDER"] = tempfile.mkdtemp()
