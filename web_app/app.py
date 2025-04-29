@@ -96,11 +96,14 @@ def register_routes(app):
                 cover_path = os.path.join(folder_path, "cover.png")
                 cover_file.save(cover_path)
             else:
-                default_cover = os.path.join("static", "default_cover.png")
+                default_cover = os.path.join(app.root_path, "static", "default_cover.png")
                 cover_path = os.path.join(folder_path, "cover.png")
                 if os.path.exists(default_cover):
                     from shutil import copyfile
                     copyfile(default_cover, cover_path)
+                else:
+                    print("default_cover.png not found")
+
 
             mongo.db.games.insert_one({
                 "title": request.form["title"],
