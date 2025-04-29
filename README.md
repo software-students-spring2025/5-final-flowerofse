@@ -1,7 +1,7 @@
 ![Lint-free](https://github.com/nyu-software-engineering/containerized-app-exercise/actions/workflows/lint.yml/badge.svg)
 ![CI Tests](https://github.com/software-students-spring2025/4-containers-excalibur-1/actions/workflows/test.yml/badge.svg)
 
-# # GameShare.io
+## GameShare.io
 
 A web-based platform where users can register, upload HTML5 games in ZIP format, and interact with other users through comments and game browsing. Users can also view cover images, comment on games.
 
